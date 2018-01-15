@@ -11,12 +11,19 @@ npm install pino-raven -g
 ## Usage
 
 ```bash
+$ node ./server.js | pino-raven --dsn=https://abc:def@sentry.io/1234
+```
+
+Or, by using configuration json file:
+
+```bash
 $ node ./server.js | pino-raven --config raven.json
 ```
 
 ## Options
 
 + `--config` (`-c`): read config from a JSON file (switches take precedence)
++ `--dsn`: Sentry DSN
 
 ## Config JSON file
 

@@ -9,25 +9,15 @@ const through2 = require('through2')
 const Raven = require('raven')
 
 const longOpts = {
-  config: String
+  config: String,
+  dns: String
 }
 
 const shortOpts = {
   c: '--config'
 }
 
-const args = nopt(longOpts, shortOpts)
-
-let userOptions = {}
-if (args.config) {
-  try {
-    userOptions = require(path.resolve(args.config))
-  } catch (e) {
-    process.stderr.write(`could not load settings file, using defaults: ${e.message}`)
-  }
-}
-
-const defaults = {
+let options = {
   dsn: null,
   logger: 'node',
   name: null,
@@ -40,7 +30,25 @@ const defaults = {
   includeModules: true
 }
 
-const options = Object.assign(defaults, userOptions)
+const args = nopt(longOpts, shortOpts, process.argv)
+options = Object.assign(options, args)
+
+if (options.version) {
+  console.log('pino-raven', require('./package.json').version)
+  process.exit(0)
+}
+
+if (options.config) {
+  try {
+    userOptions = require(path.resolve(args.config))
+    const loadedConfig = require(path.resolve(options.config))
+    const config = Object.assign(loadedConfig, argv)
+    options = Object.assign(options, settings)
+  } catch (e) {
+    console.error('`config` parameter specified but could not load file: %s', e.message)
+    process.exit(1)
+  }
+}
 
 function levelToSeverity (level) {
   let result
