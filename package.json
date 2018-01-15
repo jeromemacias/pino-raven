@@ -1,0 +1,37 @@
+{
+  "name": "pino-raven",
+  "version": "0.1.0",
+  "description": "A transport for pino that formats and sends messages to Sentry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard | snazzy"
+  },
+  "bin": {
+    "pino-raven": "./bin.js"
+  },
+  "keywords": [
+    "pino",
+    "pino-transport",
+    "logging",
+    "sentry",
+    "raven"
+  ],
+  "author": "Jérôme Macias <jerome.macias@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fast-json-parse": "~1.0.2",
+    "nopt": "~4.0.1",
+    "pump": "~2.0.0",
+    "raven": "~2.3.0",
+    "split2": "~2.2.0",
+    "through2": "~2.0.3"
+  },
+  "peerDependencies": {
+    "pino": "*"
+  },
+  "devDependencies": {
+    "snazzy": "~7.0.0",
+    "standard": "~10.0.3"
+  }
+}
