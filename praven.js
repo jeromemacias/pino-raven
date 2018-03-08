@@ -40,10 +40,8 @@ if (options.version) {
 
 if (options.config) {
   try {
-    userOptions = require(path.resolve(args.config))
     const loadedConfig = require(path.resolve(options.config))
-    const config = Object.assign(loadedConfig, argv)
-    options = Object.assign(options, settings)
+    options = Object.assign(options, loadedConfig)
   } catch (e) {
     console.error('`config` parameter specified but could not load file: %s', e.message)
     process.exit(1)
