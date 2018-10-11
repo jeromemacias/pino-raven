@@ -10,7 +10,7 @@ const Raven = require('raven')
 
 const longOpts = {
   config: String,
-  dns: String
+  dsn: String
 }
 
 const shortOpts = {
